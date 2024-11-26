@@ -1,7 +1,7 @@
 pipeline {
 
   environment {
-    docker_image_name = "hainguyen1996/flask-docker-app"
+    docker_image_name = "cactushai145/flask-docker-app"
     docker_image = ""
   }
 
