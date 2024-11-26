@@ -38,8 +38,10 @@ pipeline {
 
     stage('Deploying Flask container to Kubernetes') {
       steps {
-        script {
-          kubernetesDeploy(configs: "deployment.yaml", "service.yaml")
+        container('kubectl') {
+          withCredentials([file(credentialsId: 'kube-config', variable: 'KUBECONFIG')]) {
+            sh 'kubectl apply -f deployment.yaml -f service.yaml'
+          }
         }
       }
     }
