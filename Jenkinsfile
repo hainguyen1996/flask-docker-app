@@ -11,7 +11,6 @@ pipeline {
 
     stage('Checkout Source') {
       steps {
-        git checkout main
         git 'https://github.com/hainguyen1996/flask-docker-app.git'
       }
     }
