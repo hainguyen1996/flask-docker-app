@@ -37,12 +37,8 @@ pipeline {
     }
 
     stage('Deploying Flask container to Kubernetes') {
-      steps {
-        container('kubectl') {
-          withCredentials([file(credentialsId: 'kube-config', variable: 'KUBECONFIG')]) {
-            sh 'kubectl apply -f deployment.yaml -f service.yaml'
-          }
-        }
+      withKubeConfig([credentialsId: 'kube-config', serverUrl: 'https://192.168.56.11:6443']) {
+        sh 'kubectl apply -f deployment.yaml -f service.yaml'
       }
     }
 
